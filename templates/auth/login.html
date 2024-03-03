@@ -1,19 +1,52 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
+
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 
 {% block content %}
 
 <div class="content">
-    <h1>
-        Login
-    </h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo repellendus rerum eius labore, quas reiciendis
-        tenetur aperiam error quos excepturi sed modi ipsa harum! Pariatur veniam deserunt architecto similique
-        assumenda!
-    </p>
+    <div class="form">
+        <div class="field">
+            <div class="lebel">Username: </div>
+            <input type="text" name="username"> 
+        </div>
+        <div class="field">
+            <div class="lebel">Password: </div>
+            <input type="password" name="password"> 
+        </div>
 
-
+        <!-- <div class="row"> -->
+            <button class="submit button-style-1">Login</button>
+        <!-- </div> -->
+    </div>
+    <div class="data">
+        <div class="data-box">
+            <div class="data-box__header">Welcome to Thefacebook!</div>
+            <div class="data-box__body">
+                <div class="title">[ Welcome to Thefacebook ]</div>
+                <div class="p">Thefacebook is an online directory that connects people through social networks at collages</div>
+                <div class="p">We have openned up Thefacebook for populat consumption as <b>Harvard University.</b></div>
+                <div class="p">
+                    <div>You can use Thefacebook to:</div>
+                    <ul>
+                        <li>Search for people at your school</li>
+                        <li>Find out who are in your classes</li>
+                        <li>Look up your friends' friends</li>
+                        <li>See a visualization of your social network</li>
+                    </ul>
+                </div>
+                <div class="p">To get started, click below to register. If you have already registered, you can log in.</div>
+                <div class="row">
+                    <a href="{% url 'register' %}" class="button-style-1">Register</a>
+                    <a href="{% url 'login' %}" class="button-style-1">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

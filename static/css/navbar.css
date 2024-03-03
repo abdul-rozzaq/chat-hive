@@ -1,3 +1,20 @@
-
+.navbar {
+  background-color: #3b5998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar .container {
+  height: 65px;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .container .logo {
+  font-size: 35px;
+  color: white;
+  font-weight: 500;
+}
 
 /*# sourceMappingURL=navbar.css.map */

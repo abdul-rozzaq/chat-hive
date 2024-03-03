@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
     {% block link %}
@@ -16,17 +17,12 @@
     
     <div class="navbar">
         <div class="container">
-            <div class="logo">The Facebook</div>
-
-
-            <div class="auth">
-                <a class="login">Login</a>
-            </div>
+            <a href="{% url 'home' %}" class="logo">The Facebook</a>
 
         </div>
     </div>
     
-    {% block header %}
+    {% block content %}
     {% endblock %}
 
 </body>

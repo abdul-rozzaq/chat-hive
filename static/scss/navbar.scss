@@ -1,0 +1,27 @@
+
+$main-color: #3b5998;
+$second-color: #5289dc;
+
+
+.navbar {
+    background-color: #3b5998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .container {
+        height: 65px;
+        width: 60%;
+        // background-color: red;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            font-size: 35px;
+            color: white;
+            font-weight: 500;
+        }
+    }
+}
