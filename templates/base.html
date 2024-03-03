@@ -1,0 +1,33 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+    {% block link %}
+    {% endblock %}
+
+    <title>The Facebook</title>
+</head>
+<body>
+    
+    <div class="navbar">
+        <div class="container">
+            <div class="logo">The Facebook</div>
+
+
+            <div class="auth">
+                <a class="login">Login</a>
+            </div>
+
+        </div>
+    </div>
+    
+    {% block header %}
+    {% endblock %}
+
+</body>
+</html>
