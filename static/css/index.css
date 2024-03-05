@@ -58,7 +58,7 @@
   gap: 1rem;
 }
 .content .images.active {
-  display: grid !important;
+  display: grid;
 }
 .content .images .image {
   cursor: pointer;
@@ -66,6 +66,16 @@
   height: 370px;
   background-color: #f9f9f9;
   overflow: hidden;
+  position: relative;
+}
+.content .images .image .created-at {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: white;
+  background-color: #3b5998;
+  z-index: 180;
+  padding: 0.5rem;
 }
 .content .images .image img {
   transition: 0.3s ease-in-out;
@@ -76,6 +86,48 @@
 }
 .content .images .image:hover img {
   transform: scale(1.05);
+}
+.content .friends {
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+  gap: 1rem;
+}
+.content .friends.active {
+  display: grid !important;
+}
+.content .friends .friend {
+  width: 100%;
+  border: 1px solid #3b5998;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.content .friends .friend .col {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.content .friends .friend .col .username {
+  font-weight: bold;
+  font-size: 16px;
+}
+.content .friends .friend .image {
+  background-color: #3b5998;
+  width: 100px;
+  height: 100px;
+  border-radius: inherit;
+}
+.content .friends .friend .add-friend-button {
+  background-color: #3b5998;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
 }
 .content .hidden-btn {
   position: absolute;

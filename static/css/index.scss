@@ -1,3 +1,7 @@
+$main-color: #3b5998;
+$second-color: #5289dc;
+
+
 .content {
     display: flex;
     flex-direction: column;
@@ -82,7 +86,7 @@
         gap: 1rem;
 
         &.active {
-            display: grid !important;
+            display: grid;
         }
 
         .image {
@@ -91,6 +95,18 @@
             height: 370px;
             background-color: #f9f9f9;
             overflow: hidden;
+            position: relative;
+
+            .created-at {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                color: white;
+                background-color: $main-color;
+                z-index: 180;
+
+                padding: .5rem;
+            }
 
             img {
                 transition: .3s ease-in-out;
@@ -105,6 +121,63 @@
                 }
             }
         }
+    }
+
+    .friends {
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-between;
+        gap: 1rem;
+
+        &.active {
+            display: grid !important;
+        }
+
+        .friend {
+            width: 100%;
+            border: 1px solid $main-color;
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+
+            .col {
+
+                padding-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: .25rem;
+
+
+                .username {
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+            }
+
+            .image {
+                background-color: $main-color;
+                width: 100px;
+                height: 100px;
+                border-radius: inherit;
+            }
+
+            .add-friend-button {
+                background-color: $main-color;
+                color: white;
+
+
+                position: absolute;
+
+                bottom: 0;
+                right: 0;
+
+                padding: .25rem .5rem;
+                font-size: 14px;
+                cursor: pointer;
+                
+            }
+        }
+
     }
 
 

@@ -43,6 +43,10 @@ $second-color: #5289dc;
                 padding: .5rem 1rem;
                 cursor: pointer;
                 font-size: 14px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
 
@@ -55,6 +59,72 @@ $second-color: #5289dc;
                     width: 100%;
                     border: 1px solid #ccc;
                     font-size: 14px;
+                    height: 40px;
+
+                }
+            }
+
+            .dropdown {
+                position: relative;
+
+                .dropdown-button {
+                    color: white;
+                    padding: .5rem 1rem;
+                    cursor: pointer;
+                    font-size: 14px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    font-weight: bold;
+                    font-size: 17px;
+                    justify-content: center;    
+                }
+
+                &:hover {
+                    .dropdown-menu {
+                        display: flex;
+                    }
+                }
+
+
+
+                .dropdown-menu {
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateY(calc(100% + 1px)) translateX(-50%);
+                    position: absolute;
+                    background-color: #f9f9f9;
+                    padding: 0.25rem;
+                    width: 250px;
+                    border: 1px solid #ccc;
+                    display: none;
+                    gap: 0.25rem;
+                    flex-direction: column;
+                
+                    .menu-button {
+                        display: flex;
+                        gap: .5rem;
+                        color: black;
+                        padding: .75rem;
+                        cursor: pointer;
+                        transition: .2s ease-in-out;
+
+                        &.danger {
+                            color: crimson;
+
+
+                            &:hover {
+                                background-color: crimson;
+                                color: white;
+                            }
+                        }
+
+
+
+                        &:hover {
+                            background-color: #f0f0f0;
+                        }
+                    }
                 }
             }
         }

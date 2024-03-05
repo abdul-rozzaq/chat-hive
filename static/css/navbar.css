@@ -34,6 +34,10 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .navbar .container .menu form {
   width: 350px;
@@ -43,4 +47,54 @@
   width: 100%;
   border: 1px solid #ccc;
   font-size: 14px;
+  height: 40px;
+}
+.navbar .container .menu .dropdown {
+  position: relative;
+}
+.navbar .container .menu .dropdown .dropdown-button {
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 17px;
+  justify-content: center;
+}
+.navbar .container .menu .dropdown:hover .dropdown-menu {
+  display: flex;
+}
+.navbar .container .menu .dropdown .dropdown-menu {
+  bottom: 0;
+  left: 50%;
+  transform: translateY(calc(100% + 1px)) translateX(-50%);
+  position: absolute;
+  background-color: #f9f9f9;
+  padding: 0.25rem;
+  width: 250px;
+  border: 1px solid #ccc;
+  display: none;
+  gap: 0.25rem;
+  flex-direction: column;
+}
+.navbar .container .menu .dropdown .dropdown-menu .menu-button {
+  display: flex;
+  gap: 0.5rem;
+  color: black;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.navbar .container .menu .dropdown .dropdown-menu .menu-button.danger {
+  color: crimson;
+}
+.navbar .container .menu .dropdown .dropdown-menu .menu-button.danger:hover {
+  background-color: crimson;
+  color: white;
+}
+.navbar .container .menu .dropdown .dropdown-menu .menu-button:hover {
+  background-color: #f0f0f0;
 }/*# sourceMappingURL=navbar.css.map */

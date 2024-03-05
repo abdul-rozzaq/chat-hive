@@ -17,9 +17,12 @@ $second-color: #5289dc;
     margin: 1rem auto;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 .button-style-1{
-    
     width: fit-content;
 
     display: flex;
