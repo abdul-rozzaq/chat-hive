@@ -1,0 +1,22 @@
+.tabs {
+  display: flex;
+  gap: 20px;
+  font-weight: 500;
+}
+.tabs .tab {
+  padding: 7px;
+  cursor: pointer;
+  position: relative;
+  color: #000;
+}
+.tabs .tab.active {
+  border-bottom: 2px solid #3b5998;
+  color: #3b5998;
+}
+
+.tabbar-view .tab-page {
+  display: none;
+}
+.tabbar-view .tab-page.active {
+  display: inline-block;
+}/*# sourceMappingURL=tabbar.css.map */

@@ -9,27 +9,31 @@
 {% block content %}
 
 <div class="content">
-    <div class="form">
+    <form class="form" method="post">{% csrf_token %}
         <div class="field">
             <div class="lebel">Username: </div>
-            <input type="text" name="username"> 
+            <input type="text" name="username" autofocus> 
         </div>
         <div class="field">
             <div class="lebel">Password: </div>
             <input type="password" name="password"> 
         </div>
 
-        <!-- <div class="row"> -->
-            <button class="submit button-style-1">Login</button>
-        <!-- </div> -->
-    </div>
+        <button class="submit button-style-1">Login</button>
+
+        {% if error %}
+        <ul>
+            <li>{{ error }}</li>
+        </ul>
+        {% endif %}
+    </form>
     <div class="data">
         <div class="data-box">
             <div class="data-box__header">Welcome to Thefacebook!</div>
             <div class="data-box__body">
                 <div class="title">[ Welcome to Thefacebook ]</div>
                 <div class="p">Thefacebook is an online directory that connects people through social networks at collages</div>
-                <div class="p">We have openned up Thefacebook for populat consumption as <b>Harvard University.</b></div>
+                <div class="p">We have opened up Thefacebook for popular consumption as <b>Harvard University.</b></div>
                 <div class="p">
                     <div>You can use Thefacebook to:</div>
                     <ul>

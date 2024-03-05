@@ -1,0 +1,70 @@
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-wrapper.d-none {
+  display: none;
+}
+.modal-wrapper .modal {
+  background-color: white;
+  max-width: 400px;
+  min-width: 400px;
+  position: relative;
+  padding: 1rem;
+  font-weight: 500;
+}
+.modal-wrapper .modal .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.modal-wrapper .modal .close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-wrapper .modal .close:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.image-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-modal.d-none {
+  display: none;
+}
+.image-modal .wrapper {
+  height: 75vh;
+}
+.image-modal .wrapper #current-image {
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}/*# sourceMappingURL=modal.css.map */

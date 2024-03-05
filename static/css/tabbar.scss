@@ -1,0 +1,53 @@
+$main-color: #3b5998;
+
+
+.tabs {
+    display: flex;
+    gap: 20px;
+    font-weight: 500;
+
+    .tab {
+        padding: 7px;
+        cursor: pointer;
+        position: relative;
+        color: #000;
+
+        &.active {
+            border-bottom: 2px solid $main-color;
+            color: $main-color
+        }
+
+        // &.active::before{
+        //     content: unset;
+        // }
+
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     bottom: 0;
+        //     left: 50%;
+        //     width: 0%;
+        //     height: 2px;
+        //     background-color: black;
+        //     transition: .3s ease-in-out;
+        //     transform: translate(-50%);
+        // }
+
+        // &:hover {
+        //     &::before {
+        //         width: 100%;
+        //     }
+        // }
+    }
+}
+
+
+.tabbar-view {
+    .tab-page {
+        display: none;
+        
+        &.active {
+            display: inline-block;
+        }
+    }
+}

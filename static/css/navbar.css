@@ -3,18 +3,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  z-index: 100;
+  top: 0;
 }
 .navbar .container {
-  height: 65px;
+  height: 60px;
   width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-inline: 0.5rem;
 }
 .navbar .container .logo {
   font-size: 35px;
   color: white;
   font-weight: 500;
 }
-
-/*# sourceMappingURL=navbar.css.map */
+.navbar .container .link {
+  color: white;
+}
+.navbar .container .menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.navbar .container .menu .add-post {
+  border: 1px solid #ccc;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 14px;
+}
+.navbar .container .menu form {
+  width: 350px;
+}
+.navbar .container .menu form input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}/*# sourceMappingURL=navbar.css.map */

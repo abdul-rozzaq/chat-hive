@@ -1,3 +1,4 @@
+$main-color: #3b5998;
 $second-color: #5289dc;
 
 
@@ -13,8 +14,7 @@ $second-color: #5289dc;
 
 .content {
     width: 60%;
-    margin: 0 auto;
-    margin-top: 1rem;
+    margin: 1rem auto;
 }
 
 
@@ -28,7 +28,7 @@ $second-color: #5289dc;
 
     background-color: $second-color;
     padding: .2rem .6rem;
-    border: 5px #72a4ef;
+    border: 3px #8ebafc;
     border-style: outset;
     font-size: 1rem;
     color: white;
@@ -38,4 +38,33 @@ $second-color: #5289dc;
         border-style: solid;
 
     }
+}
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+input.textfield {
+    padding: .5rem;
+    width: 100%;
+}
+
+
+input.hidden {
+    display: none;
+}
+
+.primary {
+    background-color: $main-color;
+}
+
+.btn {
+    padding: .75rem;
+    width: 100%;
+    color: white;
+    border: none;
+    cursor: pointer;
 }

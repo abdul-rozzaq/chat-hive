@@ -19,6 +19,20 @@
         <div class="container">
             <a href="{% url 'home' %}" class="logo">The Facebook</a>
 
+            
+            {% if request.user.is_authenticated %}
+            <div class="menu">
+                <form action="search/">
+                    <input type="search" name="query" id="" placeholder="Search new friends ... ">
+                </form>
+
+                <div class="add-post open-modal" data-target-id="ADD-POST">New Post</div>
+    
+                <!-- <a href="{% url 'logout' %}" class="link">logout</a> -->
+            </div>
+            {% endif %}
+
+    
         </div>
     </div>
     

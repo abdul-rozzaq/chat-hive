@@ -1,19 +1,107 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
 
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/tabbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+{% endblock %}
 
 {% block content %}
 
 <div class="content">
-    <h1>
-        Index
-    </h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo repellendus rerum eius labore, quas reiciendis
-        tenetur aperiam error quos excepturi sed modi ipsa harum! Pariatur veniam deserunt architecto similique
-        assumenda!
-    </p>
+    <div class="background-image">
+        <img src="{{ request.user.background_image.url }}" draggable="false">
+        <div class="hidden-btn">
+            <div class="open-modal" data-target-id="UPDATE-BACKGROUND-IMAGE">Update</div>
+        </div>
+    </div>
+    
+    <div class="info">
+        <div class="avatar">
+            <img src="{{ request.user.avatar.url }}" draggable="false">
 
+            <div class="hidden-btn">
+                <div class="open-modal" data-target-id="UPDATE-IMAGE">Update</div>
+            </div>
+        </div>
+        <div class="full-name">Abdurazzoq Abdusalomov</div>
 
+        <div class="tabs">
+            <a href="?tab=images" class="tab">Images</a>
+            <a href="?tab=friends" class="tab">Friends</a>
+        </div>
+    </div>
+    <div class="tabbar-view">
+        <div class="tab-page images" data-tab-id="images">
+            {% for post in posts %}
+                <div class="image image-modal-target">
+                    <img src="{{ post.image.url }}">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="tab-page" data-tab-id="friends">Page 4</div>
+    </div>
 </div>
+
+<div class="modal-wrapper d-none" data-modal-id="ADD-POST">
+    <div class="modal">
+        <div class="close">❌️</div>
+        <div class="title mb-16">New Post</div>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="hidden" name="id" value="ADD-POST">
+            <div class="field mb-16">
+                <div class="label mb-10">Image</div>
+                <input type="file" name="image" accept="image/*">
+            </div>
+            <div class="field mb-16">
+                <div class="label mb-10">Title</div>
+                <input type="text" class="textfield" name="title">
+            </div>
+            <button class="btn primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal-wrapper d-none" data-modal-id="UPDATE-IMAGE">
+    <div class="modal">
+        <div class="close">❌️</div>
+        <div class="title mb-16">Update Avatar</div>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="hidden" name="id" value="UPDATE-IMAGE">
+            <div class="field mb-16">
+                <div class="label mb-10">Avatar</div>
+                <input type="file" name="image" accept="image/*">
+            </div>
+            <button class="btn primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal-wrapper d-none" data-modal-id="UPDATE-BACKGROUND-IMAGE">
+    <div class="modal">
+        <div class="close">❌️</div>
+        <div class="title mb-16">Update background image</div>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="hidden" name="id" value="UPDATE-BACKGROUND-IMAGE">
+            <div class="field mb-16">
+                <div class="label mb-10">Image</div>
+                <input type="file" name="image" accept="image/*">
+            </div>
+            <button class="btn primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div class="image-modal d-none">
+    <div class="wrapper">
+        <img src="" alt="" id="current-image">
+    </div>
+</div>
+
+<script src="{% static 'js/tabbar.js' %}"></script>
+<script src="{% static 'js/selector.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>
 
 {% endblock %}
