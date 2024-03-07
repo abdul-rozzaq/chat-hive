@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from .api import get_friend_requests, confirm_friend_request, cancel_friend_request
+from .api import get_friend_requests, confirm_friend_request, cancel_friend_request, get_users
 from .views import *
 from .consumers import ChatConsumer, NotificationConsumer
 
@@ -24,6 +24,7 @@ urlpatterns += [
     path('api/friend-requests/', get_friend_requests),
     path('api/confirm-request/<int:pk>/', confirm_friend_request),
     path('api/cancel-request/<int:pk>/', cancel_friend_request),
+    path('api/users/', get_users),
 ]
 
 # Websocket urls

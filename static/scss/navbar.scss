@@ -37,6 +37,16 @@ $second-color: #5289dc;
             align-items: center;
             gap: .5rem;
 
+            .search {
+                height: 40px;
+                width: 300px;
+                background-color: white;
+                padding-left: .8rem;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
             .add-post {
                 border: 1px solid #ccc;
                 color: white;

@@ -124,6 +124,7 @@ def chat_page(request, username):
 
     return render(request, 'chat.html', context)
 
+
 def send_friend_request(request, pk):
     user = User.objects.filter(pk=pk)
     

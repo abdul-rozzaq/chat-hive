@@ -98,7 +98,13 @@ input.hidden {
   gap: 0.5rem;
   font-size: 20px;
 }
+.modal-wrapper #search {
+  width: 100%;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+}
 .modal-wrapper .chats {
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

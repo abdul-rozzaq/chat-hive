@@ -28,6 +28,15 @@
   align-items: center;
   gap: 0.5rem;
 }
+.navbar .container .menu .search {
+  height: 40px;
+  width: 300px;
+  background-color: white;
+  padding-left: 0.8rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 .navbar .container .menu .add-post {
   border: 1px solid #ccc;
   color: white;

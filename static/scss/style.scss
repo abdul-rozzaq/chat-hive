@@ -115,7 +115,14 @@ input.hidden {
         }
     }
 
+    #search {
+        width: 100%;
+        padding: .25rem;
+        margin-bottom: .5rem;
+    }
+
     .chats {
+        min-height: 500px;  
         display: flex;
         flex-direction: column;
         gap: .5rem;
@@ -167,7 +174,7 @@ input.hidden {
         background-color: #3b5998;
 
         animation: notifyAnim 1s ease-in-out 3s 1 alternate forwards;
-        
+
         img {
             width: 50px;
             height: 50px;

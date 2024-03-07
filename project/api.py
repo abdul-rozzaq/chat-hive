@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.request import Request
 
-from project.models import FriendRequest
-from project.serializers import FriendRequestSerializer
+from project.models import FriendRequest, User
+from project.serializers import FriendRequestSerializer, UserSerializer
 
 
 @api_view(['GET'])
@@ -30,7 +30,7 @@ def confirm_friend_request(request: Request, pk: int):
         req.accept()
         status = 200
 
-    return Response(status=200)
+    return Response(status=status)
 
 
 
@@ -47,6 +47,17 @@ def cancel_friend_request(request: Request, pk: int):
         req.delete()
         status = 200
 
-    return Response(status=200)
+    return Response(status=status)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_users(request: Request):
+    user = request.user
+
+    queryset = User.objects.exclude(pk=request.user.pk).exclude(pk__in=[x.friend.pk for x in user.friends.all()])
+
+    # queryset = filter()
+
+    serializer = UserSerializer(queryset, many=True, context={'request': request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
