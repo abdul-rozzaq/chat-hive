@@ -1,6 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+from django.conf import settings
 
 
 class User(AbstractUser):
@@ -8,11 +12,14 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatar', default='images/default-user.avif')
 
     def add_friend(self, friend):
-        return Friend.objects.create(user=self, friend=friend)
+        Friend.objects.create(user=self, friend=friend)
+        Friend.objects.create(user=friend, friend=self)
     
     def full_name(self):
         return self.first_name + ' ' + self.last_name
 
+    def friends_list(self):
+        return [friend.friend for friend in self.friends.all()]
 
 class Friend(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='friends')
@@ -28,6 +35,9 @@ class FriendRequest(models.Model):
 
         return self.delete()
 
+    @property
+    def user(self):
+        return self._from
 
 class Post(models.Model):
     creator = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
@@ -42,3 +52,52 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.creator.username
+    
+class Message(models.Model):
+    text = models.CharField(max_length=256)
+
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return self.sender.username
+    
+
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'sender': {
+                'id': self.sender.pk,
+                'avatar': self.sender.avatar.url,
+                'receiver': self.receiver.pk,
+                'username': self.sender.username,
+                'full_name': self.sender.full_name(),
+            },
+            'receiver': self.receiver.pk,
+            'text': self.text,
+            'created_at': self.created_at.strftime('%H:%M'),
+        }
+
+    def notify(self) -> None:
+        channel_layer = get_channel_layer()
+
+        group_name = f"channel_{self.receiver.pk}"
+
+        async_to_sync(channel_layer.group_send)(
+            group_name,
+            {
+                "type": "send_notification",
+                "message": self.to_dict(),
+            },
+        )
+
+    def save(self, *args, **kwargs):
+
+        if self.pk is None:
+            object = super().save(*args, **kwargs)
+
+            self.notify()
+        else:
+            return super().save(*args, **kwargs)

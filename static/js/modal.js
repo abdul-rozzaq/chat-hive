@@ -32,20 +32,22 @@ closeButtons.forEach(btn => {
 
 
 let targets = document.querySelectorAll('.image-modal-target'),
-    imageModal = document.querySelector('.image-modal')
+    imageModals = document.querySelectorAll('.image-modal')
 
-console.log();
+if (imageModals.length != 0){
+    let imageModal = imageModals[0] 
 
-targets.forEach(btn => {
-    btn.addEventListener('click', () => {
-        imageModal.querySelector('#current-image').setAttribute('src', btn.querySelector('img').getAttribute('src'))
-        imageModal.classList.remove('d-none')
+    targets.forEach(btn => {
+        btn.addEventListener('click', () => {
+            imageModal.querySelector('#current-image').setAttribute('src', btn.querySelector('img').getAttribute('src'))
+            imageModal.classList.remove('d-none')
 
+        })
+    });
+
+    imageModal.addEventListener('click', (e) => {
+        if (e.target.id != 'current-image') {
+            imageModal.classList.add('d-none')
+        }
     })
-});
-
-imageModal.addEventListener('click', (e) => {
-    if (e.target.id != 'current-image') {
-        imageModal.classList.add('d-none')
-    }
-})
+}

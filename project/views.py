@@ -1,14 +1,20 @@
+import json
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout as lgt
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from project.forms import PostForm, UserCreateForm
-from project.models import Post, User
+from project.models import FriendRequest, Message, Post, User
+
 
 @login_required(login_url='login')
 def home_page(request):
     context = {
-        'posts': Post.objects.filter(creator=request.user) 
+        'user': request.user,
+        'posts': Post.objects.filter(creator=request.user),
+        'friends': request.user.friends.all(),
+        'user_friends': request.user.friends.all(),
     }
 
     if request.method == 'POST':
@@ -40,9 +46,9 @@ def home_page(request):
                     user.background_image = image
                     user.save()
 
+        return redirect(request.META.get('HTTP_REFERER', 'home'))
 
-
-    return render(request, "index.html", context)
+    return render(request, "profile.html", context)
 
 
 def login_page(request):
@@ -90,3 +96,39 @@ def register_page(request):
 def logout(request):
     lgt(request)
     return redirect('login')
+
+
+@login_required(login_url='login')
+def user_profile(request, username):
+
+    user = User.objects.get(username=username)
+
+    context = {
+        'user': user,
+        'posts': Post.objects.filter(creator=user),
+        'friends': user.friends.exclude(friend=request.user),
+        'user_friends': request.user.friends.all(),
+    }
+    return render(request, "profile.html", context)
+
+
+@login_required(login_url='login')
+def chat_page(request, username):
+    receiver = User.objects.get(username=username)
+
+    context = {
+        'receiver': receiver,
+        'messages': Message.objects.filter(Q(sender=request.user, receiver=receiver) | Q(receiver=request.user, sender=receiver)).order_by('created_at'),
+        'user_friends': request.user.friends.all(),
+    }
+
+    return render(request, 'chat.html', context)
+
+def send_friend_request(request, pk):
+    user = User.objects.filter(pk=pk)
+    
+
+    if user.exists() and not FriendRequest.objects.filter(_from=request.user, to=user.first()).exists():
+        FriendRequest.objects.create(_from=request.user, to=user.first())
+
+    return redirect(request.META.get('HTTP_REFERER', 'home'))

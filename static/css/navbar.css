@@ -26,7 +26,7 @@
 .navbar .container .menu {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 .navbar .container .menu .add-post {
   border: 1px solid #ccc;
@@ -39,22 +39,12 @@
   align-items: center;
   justify-content: center;
 }
-.navbar .container .menu form {
-  width: 350px;
-}
-.navbar .container .menu form input {
-  padding: 0.5rem 1rem;
-  width: 100%;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  height: 40px;
-}
 .navbar .container .menu .dropdown {
   position: relative;
 }
 .navbar .container .menu .dropdown .dropdown-button {
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 8px 8px;
   cursor: pointer;
   font-size: 14px;
   height: 40px;
@@ -63,6 +53,30 @@
   font-weight: bold;
   font-size: 17px;
   justify-content: center;
+  position: relative;
+}
+.navbar .container .menu .dropdown .dropdown-button.notify::before {
+  top: 0;
+  right: 0;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+}
+.navbar .container .menu .dropdown .dropdown-button.notify + .dropdown-menu .notify {
+  position: relative;
+}
+.navbar .container .menu .dropdown .dropdown-button.notify + .dropdown-menu .notify::before {
+  top: 0;
+  right: 0;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: red;
 }
 .navbar .container .menu .dropdown:hover .dropdown-menu {
   display: flex;
@@ -82,7 +96,8 @@
 }
 .navbar .container .menu .dropdown .dropdown-menu .menu-button {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
   color: black;
   padding: 0.75rem;
   cursor: pointer;
@@ -96,5 +111,7 @@
   color: white;
 }
 .navbar .container .menu .dropdown .dropdown-menu .menu-button:hover {
-  background-color: #f0f0f0;
-}/*# sourceMappingURL=navbar.css.map */
+  background-color: #eee;
+}
+
+/*# sourceMappingURL=navbar.css.map */

@@ -1,7 +1,7 @@
-
-let tabs = document.querySelectorAll('.tab'), pages = document.querySelectorAll('.tab-page')
-let url = new URL(window.location);
-let tabName = url.searchParams.get('tab');
+let tabs = document.querySelectorAll('.tab'), 
+    pages = document.querySelectorAll('.tab-page'),
+    url = new URL(window.location),
+    tabName = url.searchParams.get('tab')
 
 if (tabName != null) {
     tabs.forEach(tab => {

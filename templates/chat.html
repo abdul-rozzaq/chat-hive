@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block link %}
+
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+{% endblock %}
+
+{% block header %}
+    {{ receiver.full_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="wrapper">
+        <div class="messages">
+                        
+
+            {% for msg in messages %}
+
+                <div class="message {% if msg.sender == request.user %} sended {% endif %}">
+                    <img src="{{ msg.sender.avatar.url }}" alt="" class="creator-avatar">
+                    <div class="text">
+                        {{ msg.text }}
+                        <div class="created-at">{{ msg.created_at.time }}</div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            
+        </div>
+    </div>
+
+    <div class="form">
+        <input type="text" autofocus placeholder="Type message here ..." id="message_input">
+        <div class="send-button">Send</div>
+    </div>
+</div>
+
+<div id="receiver-id" data-id="{{ receiver.pk }}"></div>
+
+<script src="{% static 'js/chat.js' %}"></script>
+{% endblock %}
