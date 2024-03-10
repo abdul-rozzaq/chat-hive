@@ -22,45 +22,61 @@
   display: flex;
   padding: 0.5rem;
   font-weight: 500;
-  align-items: center;
+  align-items: end;
   gap: 0.5rem;
 }
-.content .wrapper .messages .message .text {
+.content .wrapper .messages .message .col {
+  flex-grow: 1;
+  gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.content .wrapper .messages .message .col .text {
   background-color: #f1f1f1;
   color: black;
   padding: 0.75rem;
   padding-bottom: 1.25rem;
   max-width: 65%;
   min-width: 10%;
-  border-radius: 0.5rem 0.5rem 0.5rem 0;
+  border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
   text-align: start;
   position: relative;
 }
-.content .wrapper .messages .message .text .created-at {
+.content .wrapper .messages .message .col .text .created-at {
   position: absolute;
-  left: 3px;
+  left: 5px;
   bottom: 3px;
   font-size: 11px;
 }
+.content .wrapper .messages .message .col .text:last-child {
+  border-radius: 0.5rem 1.5rem 1.5rem 0;
+}
 .content .wrapper .messages .message .creator-avatar {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 .content .wrapper .messages .message.sended {
-  justify-content: end;
+  justify-content: start;
   flex-direction: row-reverse;
 }
-.content .wrapper .messages .message.sended .text {
+.content .wrapper .messages .message.sended .col {
+  align-items: end;
+}
+.content .wrapper .messages .message.sended .col .text {
   color: white;
   background-color: teal;
-  border-radius: 0.5rem 0.5rem 0 0.5rem;
+  border-radius: 1.5rem 1.5rem 0.5rem 1.5rem;
   text-align: end;
   padding-left: 0.75rem;
 }
-.content .wrapper .messages .message.sended .text .created-at {
+.content .wrapper .messages .message.sended .col .text:last-child {
+  border-radius: 1.5rem 0.5rem 0 1.5rem;
+}
+.content .wrapper .messages .message.sended .col .text .created-at {
   left: unset;
-  right: 3px;
+  right: 5px;
   bottom: 3px;
 }
 .content .form {

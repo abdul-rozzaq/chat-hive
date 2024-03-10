@@ -11,9 +11,15 @@ const messageWidget = (message) => {
     return `
     <div class="message ${message.receiver == receiverId.getAttribute('data-id') ? 'sended' : ''}">
         <img src="${window.location.origin + message.sender.avatar}" alt="" class="creator-avatar">
-        <div class="text">
-            ${message.text}
-            <div class="created-at">${message.created_at}</div>
+        <div class="col">
+            <div class="text">
+                ${message.text}
+                <div class="created-at">${message.created_at}</div>
+            </div>
+            <div class="text">
+                ${message.text}
+                <div class="created-at">${message.created_at}</div>
+            </div>
         </div>
     </div>
 `}

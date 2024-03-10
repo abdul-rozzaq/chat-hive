@@ -32,6 +32,8 @@ const Connect = () => {
 
 
         if (receiver == null || receiver.getAttribute('data-id') != message.sender.id) {
+            audio.play()
+
             const newNotify = document.createElement('a')
             newNotify.classList.add('notification')
             newNotify.setAttribute('href', `/chat/@${message.sender.username}`)

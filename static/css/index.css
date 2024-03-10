@@ -96,38 +96,41 @@
 .content .friends.active {
   display: grid !important;
 }
-.content .friends .friend {
+.content .friends .wrapper {
+  position: relative;
+}
+.content .friends .wrapper .friend {
+  color: black;
   width: 100%;
   border: 1px solid #3b5998;
   display: flex;
   gap: 1rem;
-  position: relative;
   overflow: hidden;
 }
-.content .friends .friend .col {
+.content .friends .wrapper .friend .col {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
-.content .friends .friend .col .username {
+.content .friends .wrapper .friend .col .username {
   font-weight: bold;
   font-size: 16px;
   color: black;
 }
-.content .friends .friend .image {
+.content .friends .wrapper .friend .image {
   background-color: #3b5998;
   width: 100px;
   height: 100px;
   border-radius: inherit;
   border-right: 1px solid #3b5998;
 }
-.content .friends .friend .image img {
+.content .friends .wrapper .friend .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.content .friends .friend .add-friend-button {
+.content .friends .wrapper .add-friend-button {
   background-color: #3b5998;
   color: white;
   position: absolute;

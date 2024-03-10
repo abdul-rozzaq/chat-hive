@@ -21,9 +21,15 @@
 
                 <div class="message {% if msg.sender == request.user %} sended {% endif %}">
                     <img src="{{ msg.sender.avatar.url }}" alt="" class="creator-avatar">
-                    <div class="text">
-                        {{ msg.text }}
-                        <div class="created-at">{{ msg.created_at.time }}</div>
+                    <div class="col">
+                        <div class="text">
+                            {{ msg.text }}
+                            <div class="created-at">{{ msg.created_at.time }}</div>
+                        </div>
+                        <div class="text">
+                            {{ msg.text }}
+                            <div class="created-at">{{ msg.created_at.time }}</div>
+                        </div>
                     </div>
                 </div>
 

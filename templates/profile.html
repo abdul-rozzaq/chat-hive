@@ -61,14 +61,16 @@
         <div class="tab-page friends" data-tab-id="friends">
             
             {% for friend in friends %}
-                <div class="friend">
-                    <div class="image">
-                        <img src="{{ friend.friend.avatar.url }}" alt="">
-                    </div>
-                    <div class="col">
-                        <div class="full-name">{{ friend.friend.full_name }}</div>
-                        <a href="{% url 'user_profile' friend.friend.username %}" class="username">@{{ friend.friend.username }}</a>
-                    </div>
+                <div class="wrapper">
+                    <a class="friend" href="{% url 'user_profile' friend.friend.username %}">
+                        <div class="image">
+                            <img src="{{ friend.friend.avatar.url }}" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="full-name">{{ friend.friend.full_name }}</div>
+                            <div class="username">@{{ friend.friend.username }}</div>
+                        </div>
+                    </a>
                     
                     {% if user != request.user %}
                         {% if friend.friend not in request.user.friends_list %}
@@ -76,6 +78,9 @@
                         {% endif %}
                     {% endif %}
                 </div>
+
+
+                
             
             {% endfor %}
 

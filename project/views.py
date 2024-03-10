@@ -84,9 +84,9 @@ def register_page(request):
         form = UserCreateForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            login(request, form.save().username)
 
-            return redirect('login')
+            return redirect('home')
 
         context['form_errors'] = form.errors
 
@@ -116,9 +116,28 @@ def user_profile(request, username):
 def chat_page(request, username):
     receiver = User.objects.get(username=username)
 
+    messages = []
+
+
+    for msg in Message.objects.filter(Q(sender=request.user, receiver=receiver) | Q(receiver=request.user, sender=receiver)).order_by('created_at'):
+        
+        minute = msg.created_at.minute
+
+        if minute not in messages:
+            messages[minute] = []
+        
+        messages[minute].append({
+                'sender': msg.sender,
+                'receiver': msg.receiver,
+                'text': msg.text,
+                'created_at': msg.created_at.strftime('%H:%M')
+            })
+
+    print(messages)
+
     context = {
         'receiver': receiver,
-        'messages': Message.objects.filter(Q(sender=request.user, receiver=receiver) | Q(receiver=request.user, sender=receiver)).order_by('created_at'),
+        'messages': messages,
         'user_friends': request.user.friends.all(),
     }
 
