@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from project.forms import PostForm, UserCreateForm
 from project.models import FriendRequest, Message, Post, User
+from project.serializers import UserSerializer
 
 
 @login_required(login_url='login')
@@ -115,25 +116,36 @@ def user_profile(request, username):
 @login_required(login_url='login')
 def chat_page(request, username):
     receiver = User.objects.get(username=username)
-
+    queryset = Message.objects.filter(Q(sender=request.user, receiver=receiver) | Q(receiver=request.user, sender=receiver)).order_by('created_at')
+    
     messages = []
 
-
-    for msg in Message.objects.filter(Q(sender=request.user, receiver=receiver) | Q(receiver=request.user, sender=receiver)).order_by('created_at'):
+    for msg in queryset:
         
         minute = msg.created_at.minute
 
-        if minute not in messages:
-            messages[minute] = []
-        
-        messages[minute].append({
-                'sender': msg.sender,
-                'receiver': msg.receiver,
-                'text': msg.text,
-                'created_at': msg.created_at.strftime('%H:%M')
-            })
-
-    print(messages)
+        if len(messages) == 0 or messages[-1]['sender']['id'] != msg.sender.pk or messages[-1]['sender']['id'] == msg.sender.pk and minute - int(messages[-1]['messages'][-1]['created_at'].split(':')[-1]) > 3:
+            messages.append(
+                {
+                    'sender': UserSerializer(msg.sender).data,
+                    'receiver': UserSerializer(msg.receiver).data,
+                    'messages': [
+                        {
+                            'pk': msg.pk,
+                            'text': msg.text,
+                            'created_at': msg.created_at.strftime('%H:%M')
+                        },
+                    ]
+                }
+            )     
+        else:
+            messages[-1]['messages'].append(
+                {
+                    'pk': msg.pk,
+                    'text': msg.text,
+                    'created_at': msg.created_at.strftime('%H:%M')
+                }
+            )
 
     context = {
         'receiver': receiver,

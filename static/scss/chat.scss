@@ -30,7 +30,7 @@ $main-color: #3b5998;
                 font-weight: 500;
                 align-items: end;
                 gap: .5rem;
-                
+
                 .col {
                     flex-grow: 1;
                     gap: .25rem;
@@ -38,7 +38,7 @@ $main-color: #3b5998;
                     flex-direction: column;
                     align-items: start;
 
-                    
+
 
                     .text {
                         background-color: #f1f1f1;
@@ -48,20 +48,30 @@ $main-color: #3b5998;
 
                         max-width: 65%;
                         min-width: 10%;
-                        border-radius: 1.5rem 1.5rem 1.5rem .5rem;
 
                         text-align: start;
                         position: relative;
+                        // border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+
+                        // &:last-child {
+                        //     border-radius: .5rem 1.5rem 1.5rem 0;
+                        // }
+
+                        border-radius: .5rem 1.5rem 1.5rem .5rem;
+
+                        &:first-child {
+                            border-radius: 1.0rem 1.5rem 1.5rem .5rem;
+                        }
+
+                        &:last-child {
+                            border-radius: .5rem 1.5rem 1.5rem 0;
+                        }
 
                         .created-at {
                             position: absolute;
                             left: 5px;
                             bottom: 3px;
                             font-size: 11px;
-                        }
-
-                        &:last-child {
-                            border-radius: .5rem 1.5rem  1.5rem 0;
                         }
                     }
                 }
@@ -83,14 +93,18 @@ $main-color: #3b5998;
                         .text {
                             color: white;
                             background-color: teal;
-                            border-radius: 1.5rem 1.5rem .5rem 1.5rem;
                             text-align: end;
                             padding-left: .75rem;
-                            
+                            border-radius: 1.5rem .5rem .5rem 1.5rem;
+
+                            &:first-child {
+                                border-radius: 1.5rem 1.0rem .5rem 1.5rem;
+                            }
                             &:last-child {
                                 border-radius: 1.5rem .5rem 0 1.5rem;
                             }
-    
+
+
                             .created-at {
                                 left: unset;
                                 right: 5px;

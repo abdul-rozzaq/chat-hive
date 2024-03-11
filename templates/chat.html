@@ -19,17 +19,19 @@
 
             {% for msg in messages %}
 
-                <div class="message {% if msg.sender == request.user %} sended {% endif %}">
-                    <img src="{{ msg.sender.avatar.url }}" alt="" class="creator-avatar">
+                <div class="message {% if msg.sender.id == request.user.pk %} sended {% endif %}" data-sender-id="{{ msg.sender.id }}">
+                    <img src="{{ msg.sender.avatar }}" alt="" class="creator-avatar">
                     <div class="col">
+                        
+                        {% for ms in msg.messages %}
+
                         <div class="text">
-                            {{ msg.text }}
-                            <div class="created-at">{{ msg.created_at.time }}</div>
+                            {{ ms.text }}
+                            <div class="created-at">{{ ms.created_at }}</div>
                         </div>
-                        <div class="text">
-                            {{ msg.text }}
-                            <div class="created-at">{{ msg.created_at.time }}</div>
-                        </div>
+
+                        {% endfor %}
+
                     </div>
                 </div>
 

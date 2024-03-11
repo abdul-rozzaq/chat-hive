@@ -71,7 +71,6 @@ class Message(models.Model):
             'sender': {
                 'id': self.sender.pk,
                 'avatar': self.sender.avatar.url,
-                'receiver': self.receiver.pk,
                 'username': self.sender.username,
                 'full_name': self.sender.full_name(),
             },
