@@ -26,6 +26,20 @@
         position: relative;
         padding: 1rem;
         font-weight: 500;
+        max-height: 700px;
+        overflow: hidden;
+
+        &.d-flex {
+            display: flex;
+            flex-direction: column;
+
+
+
+            .chats {
+                flex-grow: 1;
+                overflow: scroll;
+            }
+        }
 
         .title {
             font-size: 1.5rem;

@@ -26,7 +26,7 @@ const loadUsers = async () => {
     return renderUsers(users)
 }
 
-input.addEventListener('keyup', (e) => {
+_input.addEventListener('keyup', (e) => {
     let newQs = users.filter(user => `${user.first_name} ${user.last_name}`.toLowerCase().includes(e.target.value.toLowerCase()) || user.username.toLowerCase().includes(e.target.value.toLowerCase))
     return renderUsers(newQs)
 })

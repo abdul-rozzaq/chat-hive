@@ -85,7 +85,7 @@ def register_page(request):
         form = UserCreateForm(request.POST)
 
         if form.is_valid():
-            login(request, form.save().username)
+            login(request, form.save())
 
             return redirect('home')
 
