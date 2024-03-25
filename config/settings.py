@@ -1,11 +1,15 @@
 from pathlib import Path
+from environs import Env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+env = Env()
+env.read_env()
+
 SECRET_KEY = 'django-insecure-p5-ck66i=q&fcym%b$ulu8up@nykr(x4p&o_xs5gp_y3rabdj$'
 
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = ['*']
