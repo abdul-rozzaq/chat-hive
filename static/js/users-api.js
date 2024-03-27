@@ -3,7 +3,7 @@ let users = []
 const newFriends = document.querySelector('#new-friends'),
     _input = document.querySelector('.modal #search'),
     widget = (user) => `
-        <a class="chat" href="user-profile/@${user.username}">
+        <a class="chat" href="/user-profile/@${user.username}">
             <img src="${user.avatar}" alt="">
             <div class="col">
                 <div class="full-name">${user.first_name} ${user.last_name}</div>
