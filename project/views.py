@@ -164,7 +164,3 @@ def send_friend_request(request, pk):
         FriendRequest.objects.create(_from=request.user, to=user.first())
 
     return redirect(request.META.get('HTTP_REFERER', 'home'))
-
-
-def test(request):
-    return render(request, '404.html')
