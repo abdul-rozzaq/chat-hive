@@ -1,6 +1,9 @@
 const notifications = document.querySelector('.notifications'),
     receiver = document.querySelector('#receiver-id')
 
+
+const notifyAudio = document.querySelector('#notifyAudio')
+
 const notifyWidget = (message) => `
     
         <img src="${message.sender.avatar}" alt="">
@@ -29,17 +32,15 @@ const Connect = () => {
     socket.onmessage = function (e) {
         let message = JSON.parse(e.data);
         
-
-
+        
         if (receiver == null || receiver.getAttribute('data-id') != message.sender.id) {
-            audio.play()
-
             const newNotify = document.createElement('a')
             newNotify.classList.add('notification')
             newNotify.setAttribute('href', `/chat/@${message.sender.username}`)
             newNotify.innerHTML = notifyWidget(message)
             notifications.appendChild(newNotify)
         }
+        notifyAudio.play();
     };
 }
 

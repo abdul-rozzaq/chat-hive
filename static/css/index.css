@@ -36,6 +36,8 @@
   bottom: 1rem;
   left: 1rem;
   border: 3px solid white;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .content .info .avatar img {
   width: 100%;
