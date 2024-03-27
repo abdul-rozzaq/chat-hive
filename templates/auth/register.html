@@ -7,67 +7,70 @@
 
 
 {% block content %}
-
 <div class="content">
-    <form class="form" method="post">{% csrf_token %}
-        <div class="field">
-            <div class="lebel">Username:</div>
-            <input type="text" name="username" required>
-        </div>
-        <div class="field">
-            <div class="lebel">Firstname:</div>
-            <input type="text" name="first_name" required>
-        </div>
-        <div class="field">
-            <div class="lebel">Lastname:</div>
-            <input type="text" name="last_name" required>
-        </div>
-        <div class="field">
-            <div class="lebel">Password:</div>
-            <input type="password" name="password1" required>
-        </div>
-        <ul>
-            <li>Minimum length 8 character</li>
-        </ul>
-        <div class="field">
-            <div class="lebel">Password (repeat):</div>
-            <input type="password" name="password2" required>
-        </div>
-
-        <button class="submit button-style-1">Register</button>
-        <ul>
-            {% for field, error_list in form_errors.items %}
-              <li>{{ error_list.0 }}</li>
-            {% endfor %}
-        </ul>
-    </form>
-    <div class="data">
-        <div class="data-box">
-            <div class="data-box__header">Welcome to Thefacebook!</div>
-            <div class="data-box__body">
-                <div class="title">[ Welcome to Thefacebook ]</div>
-                <div class="p">Thefacebook is an online directory that connects people through social networks at
-                    collages</div>
-                <div class="p">We have openned up Thefacebook for populat consumption as <b>Harvard University.</b>
-                </div>
-                <div class="p">
-                    <div>You can use Thefacebook to:</div>
-                    <ul>
-                        <li>Search for people at your school</li>
-                        <li>Find out who are in your classes</li>
-                        <li>Look up your friends' friends</li>
-                        <li>See a visualization of your social network</li>
-                    </ul>
-                </div>
-                <div class="p">To get started, click below to register. If you have already registered, you can log in.
-                </div>
-                <div class="row">
-                    <a href="{% url 'register' %}" class="button-style-1">Register</a>
-                    <a href="{% url 'login' %}" class="button-style-1">Login</a>
-                </div>
+    <div class="form">
+        <img src="{% static 'images/main-image.png' %}" class="logo">
+        <div class="title">Ro'yhatdan o'tish</div>
+        <form method="post" autocomplete="off">{% csrf_token %}
+            <div class="field">
+                <input type="text" name="username" autocomplete="off">  
+                <div class="label">Username</div>
             </div>
-        </div>
+            <div class="field">
+                <input type="text" name="first_name" autocomplete="off">  
+                <div class="label">Firstname</div>
+            </div>
+            <div class="field">
+                <input type="text" name="last_name" autocomplete="off">  
+                <div class="label">Lastname</div>
+            </div>
+            <div class="field">
+                <input type="password" name="password1"> 
+                <div class="label">Password</div>
+            </div>
+            <div class="field">
+                <input type="password" name="password2"> 
+                <div class="label">Password (repeat)</div>
+            </div>
+
+            <ul>
+                <li>Minimum length 8 character</li>
+            </ul>
+
+            <button class="submit-button primary">Submit</button>
+
+            {% if error %}
+            <ul>
+                <li>{{ error }}</li>
+            </ul>
+            {% endif %}
+        </form>
+
+        <div class="link">Already have an account? <a href="{% url 'login' %}">Login</a></div>
     </div>
 </div>
+
+
+<script>
+    document.querySelectorAll('.field').forEach(field => {
+        let label = field.querySelector('.label')
+        let input = field.querySelector('input')
+
+        label.addEventListener('click', (e) => {
+            input.focus()
+        })
+
+        input.addEventListener('focus', (e) => {
+            label.classList.add('focus')
+        })
+
+        input.addEventListener('focusout', (e) => {
+            if (input.value.length == 0) {
+                label.classList.remove('focus')
+            }
+        })
+    })
+
+</script>
 
 {% endblock %}

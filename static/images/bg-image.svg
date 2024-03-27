@@ -1,0 +1,15 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    
+  <!-- Let's define the pattern -->
+  <!-- The width and height should be double the size of a single checker -->
+  <pattern id="pattern-checkers" x="0" y="0" width="100%" height="15" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <!-- Two instances of the same checker, only positioned apart on the `x` and `y` axis -->
+    <!-- We will define the `fill` in the CSS for flexible use -->
+  <line x1="0" y1="7" x2="100%" y2="7" stroke="#F3817F"
+          stroke-dasharray="8 4" />
+  </pattern>
+  
+  <!-- Define the shape that will contain our pattern as the fill -->
+  <rect x="0%" y="0" width="100%" height="100%" fill="url(#pattern-checkers)"></rect>
+  
+</svg>

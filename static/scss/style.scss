@@ -1,4 +1,5 @@
 $main-color: #3b5998;
+$hover-color: #254488;
 $second-color: #5289dc;
 
 
@@ -14,6 +15,9 @@ $second-color: #5289dc;
 
 body {
     height: 100vh;
+    background: white;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0);
+    background-size: 10px 10px;
 }
 
 .content {
@@ -23,27 +27,6 @@ body {
 
 ::-webkit-scrollbar {
     display: none;
-}
-
-
-.button-style-1 {
-    width: fit-content;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: $second-color;
-    padding: .2rem .6rem;
-    border: 3px #8ebafc;
-    border-style: outset;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
-
-    &:active {
-        border-style: solid;
-    }
 }
 
 .mb-16 {
@@ -66,15 +49,13 @@ input.hidden {
 
 .primary {
     background-color: $main-color;
+
+
+    &:hover {
+        background-color: $hover-color;
+    }
 }
 
-.btn {
-    padding: .75rem;
-    width: 100%;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
 
 .modal-wrapper {
     .requests {

@@ -10,6 +10,9 @@
 
 body {
   height: 100vh;
+  background: white;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0);
+  background-size: 10px 10px;
 }
 
 .content {
@@ -19,23 +22,6 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
-}
-
-.button-style-1 {
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #5289dc;
-  padding: 0.2rem 0.6rem;
-  border: 3px #8ebafc;
-  border-style: outset;
-  font-size: 1rem;
-  color: white;
-  cursor: pointer;
-}
-.button-style-1:active {
-  border-style: solid;
 }
 
 .mb-16 {
@@ -58,13 +44,8 @@ input.hidden {
 .primary {
   background-color: #3b5998;
 }
-
-.btn {
-  padding: 0.75rem;
-  width: 100%;
-  color: white;
-  border: none;
-  cursor: pointer;
+.primary:hover {
+  background-color: #254488;
 }
 
 .modal-wrapper .requests {

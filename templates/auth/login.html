@@ -9,48 +9,53 @@
 {% block content %}
 
 <div class="content">
-    <form class="form" method="post">{% csrf_token %}
-        <div class="field">
-            <div class="lebel">Username: </div>
-            <input type="text" name="username" autofocus> 
-        </div>
-        <div class="field">
-            <div class="lebel">Password: </div>
-            <input type="password" name="password"> 
-        </div>
-
-        <button class="submit button-style-1">Login</button>
-
-        {% if error %}
-        <ul>
-            <li>{{ error }}</li>
-        </ul>
-        {% endif %}
-    </form>
-    <div class="data">
-        <div class="data-box">
-            <div class="data-box__header">Welcome to Thefacebook!</div>
-            <div class="data-box__body">
-                <div class="title">[ Welcome to Thefacebook ]</div>
-                <div class="p">Thefacebook is an online directory that connects people through social networks at collages</div>
-                <div class="p">We have opened up Thefacebook for popular consumption as <b>Harvard University.</b></div>
-                <div class="p">
-                    <div>You can use Thefacebook to:</div>
-                    <ul>
-                        <li>Search for people at your school</li>
-                        <li>Find out who are in your classes</li>
-                        <li>Look up your friends' friends</li>
-                        <li>See a visualization of your social network</li>
-                    </ul>
-                </div>
-                <div class="p">To get started, click below to register. If you have already registered, you can log in.</div>
-                <div class="row">
-                    <a href="{% url 'register' %}" class="button-style-1">Register</a>
-                    <a href="{% url 'login' %}" class="button-style-1">Login</a>
-                </div>
+    <div class="form">
+        <img src="{% static 'images/main-image.png' %}" class="logo">
+        <div class="title">The FaceBook</div>
+        <form method="post" autocomplete="off">{% csrf_token %}
+            <div class="field">
+                <input type="text" name="username" autocomplete="off">  
+                <div class="label">Username: </div>
             </div>
-        </div>
+            <div class="field">
+                <input type="password" name="password"> 
+                <div class="label">Password: </div>
+            </div>
+
+            <button class="submit-button">Submit</button>
+
+            {% if error %}
+            <ul>
+                <li>{{ error }}</li>
+            </ul>
+            {% endif %}
+        </form>
+
+        <div class="link">Don't have an account? <a href="{% url 'register' %}">Register</a></div>
     </div>
 </div>
+
+
+<script>
+    document.querySelectorAll('.field').forEach(field => {
+        let label = field.querySelector('.label')
+        let input = field.querySelector('input')
+
+        label.addEventListener('click', (e) => {
+            input.focus()
+        })
+
+        input.addEventListener('focus', (e) => {
+            label.classList.add('focus')
+        })
+
+        input.addEventListener('focusout', (e) => {
+            if (input.value.length == 0) {
+                label.classList.remove('focus')
+            }
+        })
+    })
+
+</script>
 
 {% endblock %}

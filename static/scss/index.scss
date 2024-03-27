@@ -12,6 +12,9 @@ $second-color: #5289dc;
         height: 250px;
         width: 100%;
         position: relative;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        
 
 
         img {
@@ -132,6 +135,7 @@ $second-color: #5289dc;
         }
     }
 
+
     .friends {
         grid-template-columns: repeat(3, 1fr);
         justify-content: space-between;
@@ -232,6 +236,7 @@ $second-color: #5289dc;
         }
     }
 
+    
     .open-chat-button {
         font-weight: 500;
         padding: .5rem;

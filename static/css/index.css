@@ -7,6 +7,8 @@
   height: 250px;
   width: 100%;
   position: relative;
+  border: 1px solid #ccc;
+  border-bottom: none;
 }
 .content .background-image img {
   width: 100%;
