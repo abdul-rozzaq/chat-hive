@@ -123,8 +123,9 @@ def chat_page(request, username):
     for msg in queryset:
         
         minute = msg.created_at.minute
+        hour = msg.created_at.hour
 
-        if len(messages) == 0 or messages[-1]['sender']['id'] != msg.sender.pk or messages[-1]['sender']['id'] == msg.sender.pk and minute - int(messages[-1]['messages'][-1]['created_at'].split(':')[-1]) > 3:
+        if len(messages) == 0 or messages[-1]['sender']['id'] != msg.sender.pk or messages[-1]['sender']['id'] == msg.sender.pk and minute - int(messages[-1]['messages'][-1]['created_at'].split(':')[-1]) > 3 or hour != int(messages[-1]['messages'][-1]['created_at'].split(':')[0]):
             messages.append(
                 {
                     'sender': UserSerializer(msg.sender).data,

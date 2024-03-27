@@ -88,7 +88,8 @@
   background-color: red;
 }
 .navbar .container .menu .dropdown:hover .dropdown-menu {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 .navbar .container .menu .dropdown .dropdown-menu {
   bottom: 0;
@@ -99,9 +100,12 @@
   padding: 0.25rem;
   width: 250px;
   border: 1px solid #ccc;
-  display: none;
+  display: flex;
   gap: 0.25rem;
+  opacity: 0;
   flex-direction: column;
+  transition: 0.3s ease-in-out;
+  visibility: hidden;
 }
 .navbar .container .menu .dropdown .dropdown-menu .menu-button {
   display: flex;
@@ -111,6 +115,10 @@
   padding: 0.75rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+.navbar .container .menu .dropdown .dropdown-menu .menu-button i {
+  width: 1rem;
+  height: 1rem;
 }
 .navbar .container .menu .dropdown .dropdown-menu .menu-button.danger {
   color: crimson;

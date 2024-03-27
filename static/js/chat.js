@@ -65,7 +65,7 @@ const SocketConnect = () => {
 
         if (lastMessage == null) {
             messages.innerHTML += messageWidget(jsonMessage)
-        } else if (lastMessage.getAttribute('data-sender-id') != jsonMessage.sender.id || lastMessage.getAttribute('data-sender-id') == jsonMessage.sender.id && jsonMessageCreatedTime[1] - lastTextCreatedTime[1] > 3) {
+        } else if (lastMessage.getAttribute('data-sender-id') != jsonMessage.sender.id || lastMessage.getAttribute('data-sender-id') == jsonMessage.sender.id && jsonMessageCreatedTime[1] - lastTextCreatedTime[1] > 3 || jsonMessageCreatedTime[0] != lastTextCreatedTime[0]) {
             messages.innerHTML += messageWidget(jsonMessage)
         } else {
             lastMessage.querySelector('.col').innerHTML += textWidget(jsonMessage)

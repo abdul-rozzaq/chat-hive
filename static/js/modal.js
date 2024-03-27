@@ -9,9 +9,8 @@ openButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         modals.forEach(modal => {
             if (modal.getAttribute('data-modal-id') == btn.getAttribute('data-target-id')) {
-                
-                if (modal.classList.contains('d-none')) {
-                    modal.classList.remove('d-none')
+                if (modal.classList.contains('hidden')) {
+                    modal.classList.remove('hidden')    
                 }
             }
         })
@@ -22,13 +21,9 @@ openButtons.forEach(btn => {
 
 closeButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.target.parentElement.parentElement.classList.add('d-none')
+        e.target.parentElement.parentElement.classList.add('hidden')
     })
 });
-
-
-
-
 
 
 let targets = document.querySelectorAll('.image-modal-target'),

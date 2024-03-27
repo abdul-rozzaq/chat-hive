@@ -112,11 +112,10 @@ $second-color: #5289dc;
 
                 &:hover {
                     .dropdown-menu {
-                        display: flex;
+                        visibility: visible;
+                        opacity: 1;
                     }
                 }
-
-
 
                 .dropdown-menu {
                     bottom: 0;
@@ -127,9 +126,12 @@ $second-color: #5289dc;
                     padding: 0.25rem;
                     width: 250px;
                     border: 1px solid #ccc;
-                    display: none;
+                    display: flex;
                     gap: 0.25rem;
+                    opacity: 0;
                     flex-direction: column;
+                    transition: .3s ease-in-out;
+                    visibility: hidden;
 
                     .menu-button {
                         display: flex;
@@ -139,6 +141,11 @@ $second-color: #5289dc;
                         padding: .75rem;
                         cursor: pointer;
                         transition: .2s ease-in-out;
+
+                        i {
+                            width: 1rem;
+                            height: 1rem;
+                        }
 
                         &.danger {
                             color: crimson;
