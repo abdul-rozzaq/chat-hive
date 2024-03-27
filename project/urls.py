@@ -15,7 +15,9 @@ urlpatterns = [
 
     path('user-profile/@<str:username>', user_profile, name='user_profile'),
     path('chat/@<str:username>', chat_page, name='chat'),
-    path('send-friend-request/<int:pk>/', send_friend_request, name='send_friend_request')
+    path('send-friend-request/<int:pk>/', send_friend_request, name='send_friend_request'),
+    
+    path('test/', test)
 ]
 
 # Api urls

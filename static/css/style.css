@@ -8,6 +8,10 @@
   user-select: none;
 }
 
+body {
+  height: 100vh;
+}
+
 .content {
   width: 60%;
   margin: 1rem auto;

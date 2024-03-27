@@ -1,10 +1,46 @@
 {% extends 'base.html' %}{% load static %}
 
+{% block link %}
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .content {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        gap: 1rem;
+    }
+
+    .content img {
+        width: 500px;
+        height: 500px;
+    }
+
+    .content .btn {
+        width: fit-content;
+    }
+
+
+</style>
+
+{% endblock %}
+
 {% block content %}
 
-    <div class="content">
-        <div>Page not found <a href="{% url 'home' %}">Home page</a></div>
 
+    <div class="content">
+        <img src="{% static 'images/not-found.jpg' %}" alt="">
+        <a href="{% url 'home' %}" class="btn primary">
+            Back to Homepage
+        </a>
     </div>
 
 {% endblock %}
