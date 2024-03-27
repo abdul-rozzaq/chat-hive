@@ -48,6 +48,14 @@ input.hidden {
   background-color: #254488;
 }
 
+.btn {
+  padding: 0.75rem;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .modal-wrapper .requests {
   display: flex;
   flex-direction: column;
