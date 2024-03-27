@@ -12,6 +12,7 @@
   flex-direction: column-reverse;
 }
 .content .wrapper .messages {
+  scrollbar-width: none;
   overflow: scroll;
   padding-bottom: 100px;
   display: flex;
@@ -91,25 +92,76 @@
   bottom: 1rem;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: rgba(0, 0, 0, 0.1);
-  align-items: center;
-  gap: 10px;
   backdrop-filter: blur(2px);
 }
-.content .form input {
-  padding: 0.75rem 1rem;
-  flex-grow: 1;
-  font-size: 18px;
+.content .form .form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
 }
-.content .form .send-button {
-  padding: 0.75rem 1rem;
-  height: 100%;
+.content .form .form-wrapper input {
+  padding: 1rem;
+  padding-left: 50px;
+  font-size: 1rem;
+  width: 100%;
+}
+.content .form .form-wrapper .send-button {
+  padding: 0.7rem;
   color: white;
   cursor: pointer;
+  top: 50%;
+  right: 0.5rem;
+  position: absolute;
+  transform: translateY(-50%);
+}
+.content .form .form-wrapper .send-button i {
+  width: 1rem;
+  height: 1rem;
+}
+.content .form .form-wrapper .icons-button {
+  padding: 0.6rem;
+  position: absolute;
+  cursor: pointer;
   font-size: 18px;
-  background-color: #3b5998;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+}
+.content .form .icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(calc(-100% - 0.5rem));
+  width: 300px;
+  height: 300px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  visibility: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.content .form .icons.active {
+  visibility: visible;
+}
+.content .form .icons .emoji {
+  font-size: 25px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content .form .icons .emoji:hover {
+  background-color: white;
 }
 
 /*# sourceMappingURL=chat.css.map */

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block header %}
-    {{ receiver.full_name }}
+{{ receiver.full_name }}
 {% endblock %}
 
 {% block content %}
@@ -15,39 +15,130 @@
 <div class="content">
     <div class="wrapper">
         <div class="messages">
-                        
+
 
             {% for msg in messages %}
 
-                <div class="message {% if msg.sender.id == request.user.pk %} sended {% endif %}" data-sender-id="{{ msg.sender.id }}">
-                    <img src="{{ msg.sender.avatar }}" alt="" class="creator-avatar">
-                    <div class="col">
-                        
-                        {% for ms in msg.messages %}
+            <div class="message {% if msg.sender.id == request.user.pk %} sended {% endif %}"
+                data-sender-id="{{ msg.sender.id }}">
+                <img src="{{ msg.sender.avatar }}" alt="" class="creator-avatar">
+                <div class="col">
 
-                        <div class="text">
-                            {{ ms.text }}
-                            <div class="created-at">{{ ms.created_at }}</div>
-                        </div>
+                    {% for ms in msg.messages %}
 
-                        {% endfor %}
-
+                    <div class="text">
+                        {{ ms.text }}
+                        <div class="created-at">{{ ms.created_at }}</div>
                     </div>
+
+                    {% endfor %}
+
                 </div>
+            </div>
 
             {% endfor %}
 
-            
+
         </div>
     </div>
 
     <div class="form">
-        <input type="text" autofocus placeholder="Type message here ..." id="message_input">
-        <div class="send-button">Send</div>
+        <div class="form-wrapper">
+            <div class="icons-button">
+                <i class="fa-regular fa-face-smile"></i>
+            </div>
+            <input type="text" autofocus placeholder="Type message here ..." id="message_input">
+            <div class="send-button primary">
+                <i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i>
+            </div>
+        </div>
+
+
+        <div class="icons" tabindex="1">
+            <div class="emoji">❤️</div>
+            <div class="emoji">😀</div>
+            <div class="emoji">😃</div>
+            <div class="emoji">😄</div>
+            <div class="emoji">😁</div>
+            <div class="emoji">😆</div>
+            <div class="emoji">😅</div>
+            <div class="emoji">😂</div>
+            <div class="emoji">🤣</div>
+            <div class="emoji">😊</div>
+            <div class="emoji">😇</div>
+            <div class="emoji">🙂</div>
+            <div class="emoji">🙃</div>
+            <div class="emoji">😉</div>
+            <div class="emoji">😌</div>
+            <div class="emoji">😍</div>
+            <div class="emoji">🥰</div>
+            <div class="emoji">😘</div>
+            <div class="emoji">😗</div>
+            <div class="emoji">😙</div>
+            <div class="emoji">😚</div>
+            <div class="emoji">😋</div>
+            <div class="emoji">😛</div>
+            <div class="emoji">😜</div>
+            <div class="emoji">😝</div>
+            <div class="emoji">🤑</div>
+            <div class="emoji">🤗</div>
+            <div class="emoji">🤓</div>
+            <div class="emoji">😎</div>
+            <div class="emoji">🤠</div>
+            <div class="emoji">🤡</div>
+            <div class="emoji">🥳</div>
+            <div class="emoji">😏</div>
+            <div class="emoji">😒</div>
+            <div class="emoji">😞</div>
+            <div class="emoji">😔</div>
+            <div class="emoji">😟</div>
+            <div class="emoji">😕</div>
+            <div class="emoji">🙁</div>
+            <div class="emoji">😣</div>
+            <div class="emoji">😖</div>
+            <div class="emoji">😫</div>
+            <div class="emoji">😩</div>
+            <div class="emoji">🥺</div>
+            <div class="emoji">😢</div>
+            <div class="emoji">😭</div>
+            <div class="emoji">😤</div>
+            <div class="emoji">😠</div>
+            <div class="emoji">😡</div>
+        </div>
     </div>
 </div>
 
 <div id="receiver-id" data-id="{{ receiver.pk }}"></div>
 
 <script src="{% static 'js/chat.js' %}"></script>
+
+<script>
+    let iconsButton = document.querySelector('div.icons-button')
+    let icons = document.querySelector('div.icons')
+    let chatInput = document.querySelector('#message_input')
+
+    document.addEventListener('click', (e) => {
+        if (
+            e.target != iconsButton &&
+            e.target != icons &&
+            !Array.from(icons.childNodes).includes(e.target) &&
+            !Array.from(iconsButton.childNodes).includes(e.target)
+        ) {
+            icons.classList.remove('active');
+        }
+    })
+
+    iconsButton.addEventListener('click', () => icons.classList.add('active'));
+
+    icons.childNodes.forEach(icon => icon.addEventListener('click', () => {
+        chatInput.value += icon.innerHTML
+        chatInput.focus()
+    }))
+
+
+</script>
+
+
+
+
 {% endblock %}
