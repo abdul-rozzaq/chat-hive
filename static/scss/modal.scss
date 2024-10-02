@@ -97,11 +97,22 @@
 
 
     .wrapper {
+        overflow: hidden;
         height: 75vh;
+        max-width: 90vw;
 
         #current-image {
             height: 100%;
-            object-fit: contain;
+            width: 100%;
+            object-fit: cover;
+        }
+
+
+        #image-content {
+            word-break: break-all;
+            // position: absolute;
+            color: white;
+            overflow: hidden;
         }
     }
 }

@@ -53,7 +53,7 @@ $second-color: #5289dc;
             position: absolute;
             bottom: 1rem;
             left: 1rem;
-            border: 3px solid white;
+            border: 3px solid #ccc;
 
 
             border-radius: 50%;
@@ -94,11 +94,15 @@ $second-color: #5289dc;
 
     .images {
         grid-template-columns: repeat(3, auto);
-        justify-content: space-between;
+        justify-content: start;
         gap: 1rem;
 
         &.active {
             display: grid;
+        }
+
+        &.images.space-between { // for js code profile.html 151-line
+            justify-content: space-between;
         }
 
         .image {

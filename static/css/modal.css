@@ -74,11 +74,19 @@
   display: none;
 }
 .image-modal .wrapper {
+  overflow: hidden;
   height: 75vh;
+  max-width: 90vw;
 }
 .image-modal .wrapper #current-image {
   height: 100%;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
+}
+.image-modal .wrapper #image-content {
+  word-break: break-all;
+  color: white;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=modal.css.map */

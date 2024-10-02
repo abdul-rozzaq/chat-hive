@@ -7,7 +7,16 @@
 {% endblock %}
 
 {% block header %}
-{{ receiver.full_name }}
+    <div class="user-info">
+        <div class="full-name">
+            {{ receiver.full_name }}
+        </div>
+        <div id="typing-status">
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -16,11 +25,9 @@
     <div class="wrapper">
         <div class="messages">
 
-
             {% for msg in messages %}
 
-            <div class="message {% if msg.sender.id == request.user.pk %} sended {% endif %}"
-                data-sender-id="{{ msg.sender.id }}">
+            <div class="message {% if msg.sender.id == request.user.pk %} sended {% endif %}" data-sender-id="{{ msg.sender.id }}">
                 <img src="{{ msg.sender.avatar }}" alt="" class="creator-avatar">
                 <div class="col">
 
@@ -39,20 +46,39 @@
             {% endfor %}
 
 
+            <!-- <div class="file-message sended">
+                <img src="/media/avatar/photo_2024-03-13_23-42-58.jpg" alt="" class="creator-avatar">
+
+                <div class="file-container">
+                    <a href="#" class="download-button">
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                    <div class="col">
+                        <div class="file-name">file_2024-03-13_23-42-58.jpg</div>
+                        <div class="size">2.3MB</div>
+                    </div>
+                </div>
+            </div> -->
+
         </div>
     </div>
 
     <div class="form">
         <div class="form-wrapper">
-            <div class="icons-button">
+            <div class="icons-button form-btn">
                 <i class="fa-regular fa-face-smile"></i>
             </div>
+            
             <input type="text" autofocus placeholder="Type message here ..." id="message_input">
-            <div class="send-button primary">
+
+
+            <div class="file-upload-button open-modal form-btn" data-target-id="FILE-UPLOAD">
+                <i class="fa-regular fa-file"></i>
+            </div>
+            <div class="send-button primary form-btn hidden" id="send-button">
                 <i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i>
             </div>
         </div>
-
 
         <div class="icons">
             <div class="emoji">❤️</div>
@@ -110,6 +136,27 @@
 
 <div id="receiver-id" data-id="{{ receiver.pk }}"></div>
 
+
+
+<div class="modal-wrapper hidden" data-modal-id="FILE-UPLOAD">
+    <div class="modal">
+        <div class="close">❌️</div>
+        <div class="title mb-16">Send file</div>
+        <form method="post" enctype="multipart/form-data" id="file-upload-form">{% csrf_token %}
+            <input type="hidden" name="id" value="FILE-UPLOAD">
+            <div class="field mb-16">
+                <div class="label mb-10">Image</div>
+                <input type="file" name="image" accept="image/*" id="file-input">
+            </div>
+            <div class="field mb-16">
+                <div class="label mb-10">Title</div>
+                <input type="text" class="textfield" name="caption" id="file-caption">
+            </div>
+            <button class="btn primary" id="submit-uploading-file">Submit</button>
+        </form>
+    </div>
+</div>
+
 <script src="{% static 'js/chat.js' %}"></script>
 
 <script>
@@ -135,10 +182,22 @@
         chatInput.focus()
     }))
 
+    let fileUploadButton = document.querySelector('div[data-target-id="FILE-UPLOAD"]')
+
+    document.getElementById('message_input').addEventListener("keyup", function(e) {
+        let value = e.target.value;
+
+        if (value != '' && sendButton.classList.contains('hidden')) {
+            sendButton.classList.remove('hidden');            
+            fileUploadButton.classList.add('hidden');
+
+        } else if (value == '' && fileUploadButton.classList.contains('hidden')) {
+            fileUploadButton.classList.remove('hidden');            
+            sendButton.classList.add('hidden');
+        }
+    })
 
 </script>
-
-
 
 
 {% endblock %}

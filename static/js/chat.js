@@ -1,7 +1,11 @@
 const input = document.querySelector('#message_input'),
     receiverId = document.querySelector('#receiver-id'),
     sendButton = document.querySelector('.send-button'),
-    receiverUsername = window.location.pathname.split('@')[window.location.pathname.split('@').length - 1]
+    receiverUsername = window.location.pathname.split('@')[window.location.pathname.split('@').length - 1],
+    fileUploadForm = document.querySelector('#file-upload-form'),
+    fileInput = document.querySelector('#file-input'),
+    fileCaption = document.querySelector('#file-caption'),
+    typingIndicator = document.querySelector('#typing-status');
 
 let messages = document.querySelector('.messages')
 
@@ -25,6 +29,10 @@ const textWidget = (message) => `
     </div>
 `
 
+const fileMessageWidget = (message) => `
+    
+`
+
 const scroll = () => {
     return messages.scrollTo(0, messages.scrollHeight)
 }
@@ -42,6 +50,38 @@ const sendMessage = (socket) => {
     }
 }
 
+const sendTypingStatus = (socket, code='typing') => {
+    if (socket.readyState === WebSocket.OPEN) {
+
+        socket.send(JSON.stringify({
+            'type': 'status',
+            'code': code,
+        }));
+    }
+}
+
+const sendFile = (socket, file) => {
+    if (socket.readyState === WebSocket.OPEN) {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            const fileData = event.target.result;
+            // socket.send(JSON.stringify({
+            //     'type': 'file',
+            //     'fileName': file.name,
+            //     'fileType': file.type,
+            //     'fileData': fileData.split(',')[1]
+            // }));
+        };
+
+        reader.onerror = (error) => {
+            console.error('Xatolik faylni o\'qishda:', error);
+        };
+
+        reader.readAsDataURL(file);
+    }
+};
+
 
 const SocketConnect = () => {
 
@@ -52,26 +92,38 @@ const SocketConnect = () => {
             lastText,
             lastTextCreatedTime,
             jsonMessage = JSON.parse(e.data)
-            
 
-        let messages = document.querySelector('.messages'),
-            jsonMessageCreatedTime = jsonMessage.created_at.split(':')
+        console.log(jsonMessage);
 
-        if (messages.children.length > 0) {
-            lastMessage = messages.children[messages.children.length - 1]
-            lastText = lastMessage.querySelector('.col').children[lastMessage.querySelector('.col').children.length - 1]
-            lastTextCreatedTime = lastText.querySelector('.created-at').innerHTML.split(':')
+        if (jsonMessage.type == 'text') {
+            let messages = document.querySelector('.messages'),
+                jsonMessageCreatedTime = jsonMessage.created_at.split(':')
+
+            if (messages.children.length > 0) {
+                lastMessage = messages.children[messages.children.length - 1]
+                lastText = lastMessage.querySelector('.col').children[lastMessage.querySelector('.col').children.length - 1]
+                lastTextCreatedTime = lastText.querySelector('.created-at').innerHTML.split(':')
+            }
+
+            if (lastMessage == null) {
+                messages.innerHTML += messageWidget(jsonMessage)
+            } else if (lastMessage.getAttribute('data-sender-id') != jsonMessage.sender.id || lastMessage.getAttribute('data-sender-id') == jsonMessage.sender.id && jsonMessageCreatedTime[1] - lastTextCreatedTime[1] > 3 || jsonMessageCreatedTime[0] != lastTextCreatedTime[0]) {
+                messages.innerHTML += messageWidget(jsonMessage)
+            } else {
+                lastMessage.querySelector('.col').innerHTML += textWidget(jsonMessage)
+            }
+
+            scroll()
+        } else if (jsonMessage.type == 'connection') {
+            console.log(`Connection ${jsonMessage.id} ${receiverId.getAttribute('data-id')}`);
+        } else if (jsonMessage.type == 'status' && jsonMessage.user_id == receiverId.getAttribute('data-id')) {            
+            if (jsonMessage.code == 'typing') {
+                typingIndicator.style.display  = 'inline';
+            } else if (jsonMessage.code == '') {
+                typingIndicator.style.display  = 'none';
+            }
         }
 
-        if (lastMessage == null) {
-            messages.innerHTML += messageWidget(jsonMessage)
-        } else if (lastMessage.getAttribute('data-sender-id') != jsonMessage.sender.id || lastMessage.getAttribute('data-sender-id') == jsonMessage.sender.id && jsonMessageCreatedTime[1] - lastTextCreatedTime[1] > 3 || jsonMessageCreatedTime[0] != lastTextCreatedTime[0]) {
-            messages.innerHTML += messageWidget(jsonMessage)
-        } else {
-            lastMessage.querySelector('.col').innerHTML += textWidget(jsonMessage)
-        }
-
-        scroll()
     };
 
 
@@ -85,11 +137,24 @@ const SocketConnect = () => {
 
     input.addEventListener('keyup', (e) => {
         if (e.keyCode === 13) {
+            sendTypingStatus(socket, '')
             return sendMessage(socket)
+        } else {
+            return sendTypingStatus(socket)
         }
     })
 
     sendButton.addEventListener('click', (e) => sendMessage(socket))
+
+
+    fileUploadForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        const file = fileInput.files[0];
+        const caption = fileCaption.value;
+
+        return sendFile(socket, file)
+    });
 
 }
 

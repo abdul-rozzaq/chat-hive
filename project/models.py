@@ -8,8 +8,8 @@ from django.conf import settings
 
 
 class User(AbstractUser):
-    background_image = models.ImageField(upload_to='background_images/', default='images/default-background.png')
-    avatar = models.ImageField(upload_to='avatar', default='images/default-user.avif')
+    background_image = models.ImageField(upload_to='background_images/', default='images/default-background.jpg')
+    avatar = models.ImageField(upload_to='avatar', default='images/default-user.jpg')
 
     def add_friend(self, friend):
         Friend.objects.create(user=self, friend=friend)
@@ -54,12 +54,19 @@ class Post(models.Model):
         return self.creator.username
     
 class Message(models.Model):
-    text = models.CharField(max_length=256)
+    text = models.CharField(max_length=256, blank=True)
 
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
 
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    file = models.FileField(upload_to='message-files/', blank=True, null=True)
+    
+    message_type = models.CharField(choices=(
+        ('text', 'text'),        
+        ('file', 'file'),        
+    ), default='text', max_length=256)
     
     def __str__(self) -> str:
         return self.sender.username
@@ -76,6 +83,7 @@ class Message(models.Model):
             },
             'receiver': self.receiver.pk,
             'text': self.text,
+            'type': self.message_type,
             'created_at': self.created_at.strftime('%H:%M'),
         }
 
@@ -95,8 +103,7 @@ class Message(models.Model):
     def save(self, *args, **kwargs):
 
         if self.pk is None:
-            object = super().save(*args, **kwargs)
-
+            super().save(*args, **kwargs)
             self.notify()
         else:
             return super().save(*args, **kwargs)

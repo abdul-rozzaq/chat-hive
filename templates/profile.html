@@ -69,7 +69,7 @@
                         <div class="col">
                             <div class="full-name">{{ friend.friend.full_name }}</div>
                             <div class="username">@{{ friend.friend.username }}</div>
-                        </div>
+                        </div>  
                     </a>
                     
                     {% if user != request.user %}
@@ -146,5 +146,21 @@
 </div>
 
 <script src="{% static 'js/tabbar.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageContainer = document.querySelector('.images');
+        const childElements = imageContainer.children.length;
+
+        console.log(imageContainer);
+        console.log(childElements);
+
+
+        if (childElements > 2) {
+            imageContainer.classList.add('space-between');
+            console.log(imageContainer.classList);
+        }
+    });
+</script>
 
 {% endblock %}

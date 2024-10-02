@@ -37,7 +37,7 @@
   position: absolute;
   bottom: 1rem;
   left: 1rem;
-  border: 3px solid white;
+  border: 3px solid #ccc;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -60,11 +60,14 @@
 }
 .content .images {
   grid-template-columns: repeat(3, auto);
-  justify-content: space-between;
+  justify-content: start;
   gap: 1rem;
 }
 .content .images.active {
   display: grid;
+}
+.content .images.images.space-between {
+  justify-content: space-between;
 }
 .content .images .image {
   cursor: pointer;
